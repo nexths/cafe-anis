@@ -20,7 +20,7 @@ body {
 
 /* HERO */
 .hero {
-    height: 60vh;
+    height: 50vh; /* Diminuído de 60vh para 50vh para aproximar no PC */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,7 +31,7 @@ body {
 }
 
 .hero h1 {
-    font-size: clamp(3.5rem, 10vw, 5rem);
+    font-size: clamp(3.5rem, 10vw, 5rem); /* Corrigido: Mínimo (celular) primeiro, Máximo (PC) por último */
     color: var(--accent-color);
     margin-bottom: 12px;
     line-height: 1;
@@ -101,7 +101,7 @@ body {
 .gallery-section {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 50px 20px 0 20px;
+    padding: 20px 20px 0 20px; /* Reduzido de 50px para 20px no topo */
     text-align: center;
 }
 
@@ -236,7 +236,7 @@ body {
 @media (max-width: 768px) {
     .hero {
         height: auto;
-        padding: 90px 20px 70px;
+        padding: 70px 20px 30px; /* Reduzido para aproximar as seções no celular */
     }
 
     .hero p {
@@ -254,7 +254,7 @@ body {
     }
 
     #gallery-container {
-        height: 300px; /* Reduz a altura da galeria no mobile */
+        height: 300px;
     }
 
     #panorama-container {
