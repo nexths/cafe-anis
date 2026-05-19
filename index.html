@@ -2,63 +2,169 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
     <title>Café Anis - Santa Isabel</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
-    
+    <!-- PHOTO SPHERE VIEWER -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.1.1/index.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.1.1/index.min.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.1.1/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.1.1/index.min.js"></script>
+
+    <!-- CSS -->
+
     <link rel="stylesheet" href="style.css">
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 </head>
 
 <body>
 
+    <!-- HERO -->
+
     <section class="hero">
-        <h1>Café <span>Anis</span></h1>
-        <p>Vivencie o melhor café especial de Santa Isabel em um ambiente acolhedor.</p>
+
+        <h1>
+            Café <span>Anis</span>
+        </h1>
+
+        <p>
+            Vivencie o melhor café especial
+            de Santa Isabel em um ambiente acolhedor.
+        </p>
 
         <div class="social-links">
-            <a href="https://www.instagram.com/cafeaniss_" target="_blank">Instagram</a>
-            <a href="https://maps.app.goo.gl/uoETFiui7nu99PqA6" target="_blank">Google Maps</a>
+
+            <a href="https://www.instagram.com/cafeaniss_"
+                target="_blank">
+
+                Instagram
+
+            </a>
+
+            <a href="https://maps.app.goo.gl/uoETFiui7nu99PqA6"
+                target="_blank">
+
+                Google Maps
+
+            </a>
+
         </div>
+
     </section>
+
+    <!-- GALERIA -->
 
     <section class="gallery-section">
-        <h2>Nossas Especialidades</h2>
-        <p>Um pedacinho do que espera por você.</p>
-        
+
+        <h2>
+            Nossas Especialidades
+        </h2>
+
+        <p>
+            Um pedacinho do que espera por você.
+        </p>
+
         <div id="gallery-container">
-            <div class="slide active"><img src="./assets/cafeanis2.jpeg" alt="Café Especial"></div>
-            <div class="slide"><img src="./assets/capuccino.png" alt="Doce da Casa"></div>
-            <div class="slide"><img src="./assets/cafedamanha.png" alt="Doce da Casa"></div>
-            <div class="slide"><img src="./assets/ovo.png" alt="Doce da Casa"></div>
-            <div class="slide"><img src="./assets/capuccino1.png" alt="Doce da Casa"></div>
+
+            <div class="slide active">
+                <img src="./assets/cafeanis2.jpeg">
+            </div>
+
+            <div class="slide">
+                <img src="./assets/capuccino.png">
+            </div>
+
+            <div class="slide">
+                <img src="./assets/cafedamanha.png">
+            </div>
+
+            <div class="slide">
+                <img src="./assets/ovo.png">
+            </div>
+
+            <div class="slide">
+                <img src="./assets/capuccino1.png">
+            </div>
+
         </div>
+
     </section>
+
+    <!-- TOUR -->
 
     <section class="tour-section">
-        <h2>Explore Nosso Espaço</h2>
-        <p>Dê um giro de 360° e clique nos ícones para interagir com o nosso cardápio exclusivo.</p>
+
+        <h2>
+            Explore Nosso Espaço
+        </h2>
+
+        <p>
+            Dê um giro de 360°
+            e conheça o ambiente do Café Anis.
+        </p>
 
         <div id="panorama-container">
-            <div id="cardapio-tooltip" class="custom-tooltip">
-                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=300" alt="Café Latte">
-                <h4>Latte Artesanal</h4>
-                <p>Café espresso blend da casa com leite vaporizado cremoso.</p>
-                <p class="tooltip-price">R$ 14,00</p>
+
+            <!-- OVERLAY -->
+
+            <div id="tour-overlay">
+
+                <button id="playButton">▶</button>
+              
             </div>
+
+            <!-- TOOLTIP -->
+
+            <div id="cardapio-tooltip"
+                class="custom-tooltip">
+
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=300">
+
+                <h4>
+                    Latte Artesanal
+                </h4>
+
+                <p>
+                    Café espresso blend da casa
+                    com leite vaporizado cremoso.
+                </p>
+
+                <p class="tooltip-price">
+                    R$ 14,00
+                </p>
+
+            </div>
+
         </div>
+
     </section>
+
+    <!-- CTA -->
 
     <section class="cta-section">
-        <a href="https://wa.me/11998499922" target="_blank" class="btn-whatsapp">
+
+        <a href="https://wa.me/5511998499922"
+            target="_blank"
+            class="btn-whatsapp">
+
             Fazer uma Reserva no WhatsApp
+
         </a>
+
     </section>
 
+    <!-- JS -->
+
     <script src="script.js"></script>
+
 </body>
 
 </html>
