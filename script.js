@@ -126,63 +126,45 @@ const viewer = new PhotoSphereViewer.Viewer({
 // ==========================================
 // 4. HOTSPOTS
 // ==========================================
+// ==========================================
+// 4. HOTSPOTS (CORRIGIDO PARA FUNCIONAR NA INTERNET)
+// ==========================================
 function criarHotspots(scene) {
-
-    const markers =
-        viewer.getPlugin(
-            PhotoSphereViewer.MarkersPlugin
-        );
-
+    const markers = viewer.getPlugin(PhotoSphereViewer.MarkersPlugin);
     if (!markers) return;
 
     markers.clearMarkers();
 
+    // 1. Cria os marcadores visualmente na cena
     scene.hotspots.forEach((hotspot, index) => {
-
         markers.addMarker({
-
             id: 'hotspot-' + index,
-
             position: {
                 yaw: hotspot.yaw,
                 pitch: hotspot.pitch
             },
-
-            html:
-                '<div class="custom-hotspot"></div>',
-
+            html: '<div class="custom-hotspot"></div>',
             anchor: 'center center'
-
         });
-
-        setTimeout(() => {
-
-            const marker =
-                markers.getMarker(
-                    'hotspot-' + index
-                );
-
-            if (
-                marker &&
-                marker.domElement
-            ) {
-
-                marker.domElement.addEventListener(
-                    'click',
-                    () => {
-
-                        trocarCena(hotspot);
-
-                    }
-                );
-
-            }
-
-        }, 50);
-
     });
-
 }
+
+// 2. Escuta o clique de forma nativa e segura através da biblioteca (Evita o bloqueio na Web)
+viewer.getPlugin(PhotoSphereViewer.MarkersPlugin).addEventListener('select-marker', (e) => {
+    // Descobre em qual cena estamos olhando a foto atual
+    const currentPano = viewer.getOption('panorama');
+    const currentSceneKey = Object.keys(scenes).find(key => scenes[key].panorama === currentPano);
+    
+    if (currentSceneKey) {
+        // Pega o número do hotspot pelo ID dele (ex: "hotspot-0" vira 0)
+        const index = parseInt(e.marker.id.split('-')[1]);
+        const hotspot = scenes[currentSceneKey].hotspots[index];
+        
+        if (hotspot) {
+            trocarCena(hotspot);
+        }
+    }
+});
 
 // ==========================================
 // 5. TRANSIÇÃO SUAVE
