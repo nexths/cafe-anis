@@ -131,35 +131,49 @@ function trocarCena(hotspot) {
 
     const cenaNova = scenes[hotspot.target];
 
-    const container = document.getElementById('panorama-container');
+    const panorama =
+    document.querySelector('.psv-container');
 
     if (viewer.isTransitioning) return;
 
     viewer.isTransitioning = true;
 
-    // blur suave
-    container.style.transition = 'filter 1.2s ease';
-    container.style.filter = 'blur(6px)';
+    // BLUR SUAVE
 
-    // zoom in
-    let zoomAtual = viewer.getZoomLevel();
+    panorama.style.transition =
+    'filter 1.2s ease';
+
+    panorama.style.filter =
+    'blur(6px)';
+
+    // ZOOM IN
+
+    let zoomAtual =
+    viewer.getZoomLevel();
 
     const zoomIn = setInterval(() => {
+
         zoomAtual += 1;
+
         viewer.zoom(zoomAtual);
 
         if (zoomAtual >= 70) {
+
             clearInterval(zoomIn);
         }
+
     }, 16);
 
     setTimeout(() => {
 
-        viewer.setPanorama(cenaNova.panorama, {
-            transition: false,
-            position: {
-                yaw: cenaNova.startYaw,
-                pitch: 0
+        viewer.setPanorama(
+        cenaNova.panorama, {
+
+            transition:false,
+
+            position:{
+                yaw:cenaNova.startYaw,
+                pitch:0
             }
         })
 
@@ -167,19 +181,20 @@ function trocarCena(hotspot) {
 
             criarHotspots(cenaNova);
 
-            container.style.filter = 'blur(0px)';
+            panorama.style.filter =
+            'blur(0px)';
+
             viewer.zoom(50);
 
         })
 
         .finally(() => {
+
             viewer.isTransitioning = false;
         });
 
     }, 900);
 }
-
-
 // ==========================================
 // 7. INTRO
 // ==========================================
