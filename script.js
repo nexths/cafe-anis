@@ -140,7 +140,8 @@ function iniciarTourPannellum() {
             "compass": false,
             "showCompass": false,
             "showFullscreenCtrl": false,
-            "showZoomCtrl": false
+            "showZoomCtrl": false,
+            "orientationOnMove": false
         },
 
         "scenes": {
