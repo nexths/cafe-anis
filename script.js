@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 function iniciarTourPannellum() {
     const isMobile = window.innerWidth < 768;
-    const fovInicial = isMobile ? 88 : 101.75;
+    const fovInicial = isMobile ? 80 : 101.75;
 
     window.viewer = pannellum.viewer('panorama', {
         "default": {
@@ -255,7 +255,7 @@ function irPara(cena, yawClick, pDestino, yDestino) {
     // 4. Quando a caminhada e o blur chegam no máximo (1100ms), o motor troca a cena
     setTimeout(function () {
         const isMobile = window.innerWidth < 768;
-        const fovDestino = cena === "fachada" ? (isMobile ? 75 : 110) : fovPadrao;
+        const fovDestino = cena === "fachada" ? (isMobile ? 65 : 110) : fovPadrao;
 
         window.viewer.loadScene(cena, pDestino, yDestino, fovDestino);
 
