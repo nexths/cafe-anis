@@ -20,9 +20,6 @@ if (slides.length > 0) {
 // ==========================================
 // 2. CONTROLE DO TOUR HÍBRIDO (PSV + PANNELUM)
 // ==========================================
-// ==========================================
-// 2. CONTROLE DO TOUR HÍBRIDO (PSV + PANNELUM)
-// ==========================================
 let transicaoAtiva = false;
 let planetViewer = null;
 
@@ -211,30 +208,29 @@ function iniciarTourPannellum() {
         }
     });
 
-   // TRAVA DE SEGURANÇA VISUAL (LIGA E DESLIGA AQUI)
+    // TRAVA DE SEGURANÇA VISUAL COM RECUO SUAVE ATIVADO PARA O MOBILE
     window.viewer.on('scenechange', function() {
         const pano = document.getElementById('panorama');
+        const isMobile = window.innerWidth < 768;
+        
+        // Se for celular, faz o recuo deslizando de mansinho (1.2s) para tirar o tranco do "pulo"
+        if (isMobile) {
+            const yawAtual = window.viewer.getYaw();
+            window.viewer.lookAt(0, yawAtual, 88, 1200);
+        }
         
         setTimeout(function() {
-            // 1. Desativa o blur e volta a imagem ao normal suavemente
+            // Faz o blur sumir progressivamente acompanhando o fim do afastamento
+            pano.style.transition = 'filter 0.6s ease-in-out'; 
             pano.style.filter = 'blur(0px) grayscale(0%)';
             
-            // 2. Reativa o giro automático na nova mesa
             window.viewer.startAutoRotate(-2);
-            
-            // 3. Libera o clique para o usuário poder andar novamente
             transicaoAtiva = false; 
-        }, 150); // 150ms apenas para o celular respirar com a foto nova na tela
+        }, 400); 
     });
 }
 
 
-// ==========================================
-// 4. LÓGICA DE TRANSIÇÃO COM BLUR (CINEMATOGRÁFICA)
-// ==========================================
-// ==========================================
-// 4. LÓGICA DE TRANSIÇÃO COM BLUR CORRIGIDA
-// ==========================================
 // ==========================================
 // 4. LÓGICA DE TRANSIÇÃO COM BLUR PROGRESSIVO
 // ==========================================
@@ -250,10 +246,10 @@ function irPara(cena, yawClick, pDestino, yDestino) {
     // 1. O Zoom começa aqui e vai levar 1100ms para chegar no fundo
     window.viewer.lookAt(0, yawClick, 55, 1100); 
 
-    // 2. O PULO DO GATO: Configuramos a transição do CSS para durar exatamente os mesmos 1.1s do zoom
+    // 2. Configuramos a transição do CSS para durar exatamente os mesmos 1.1s do zoom
     pano.style.transition = 'filter 1.1s ease-out';
     
-    // 3. Aplicamos o blur imediatamente. Ele vai começar em 0px e aumentar progressivamente até 5px junto com a caminhada!
+    // 3. O blur aumenta progressivamente junto com a caminhada
     pano.style.filter = 'blur(5px) grayscale(20%)';
 
     // 4. Quando a caminhada e o blur chegam no máximo (1100ms), o motor troca a cena
@@ -265,6 +261,8 @@ function irPara(cena, yawClick, pDestino, yDestino) {
 
     }, 1100); 
 }
+
+
 // ============================================================
 // LÓGICA ISOLADA DO BOTÃO DE TELA CHEIA (SEM ALTERAR O TOUR)
 // ============================================================
@@ -273,11 +271,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (fullscreenBtn) {
         fullscreenBtn.addEventListener('click', () => {
-            // Seleciona apenas o container para expandir o tour na tela toda
             const container = document.getElementById('panorama-container');
             
             if (!document.fullscreenElement) {
-                // Se não estiver em tela cheia, ativa no container
                 if (container.requestFullscreen) {
                     container.requestFullscreen();
                 } else if (container.webkitRequestFullscreen) { /* Safari / iOS */
@@ -286,7 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     container.msRequestFullscreen();
                 }
             } else {
-                // Se já estiver em tela cheia, apenas sai dela
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.webkitExitFullscreen) {
