@@ -211,20 +211,32 @@ function iniciarTourPannellum() {
         }
     });
 
-    // Ajuste fino de enquadramento ao carregar a fachada
-    /*window.viewer.on('load', function () {
-        if (window.viewer.getScene() === "fachada") {
-            const isMobile = window.innerWidth < 768;
-            if (isMobile) {
-                window.viewer.setHfov(75);
-            }
-        }
-    });*/
+   // TRAVA DE SEGURANÇA VISUAL (LIGA E DESLIGA AQUI)
+    window.viewer.on('scenechange', function() {
+        const pano = document.getElementById('panorama');
+        
+        setTimeout(function() {
+            // 1. Desativa o blur e volta a imagem ao normal suavemente
+            pano.style.filter = 'blur(0px) grayscale(0%)';
+            
+            // 2. Reativa o giro automático na nova mesa
+            window.viewer.startAutoRotate(-2);
+            
+            // 3. Libera o clique para o usuário poder andar novamente
+            transicaoAtiva = false; 
+        }, 150); // 150ms apenas para o celular respirar com a foto nova na tela
+    });
 }
 
 
 // ==========================================
 // 4. LÓGICA DE TRANSIÇÃO COM BLUR (CINEMATOGRÁFICA)
+// ==========================================
+// ==========================================
+// 4. LÓGICA DE TRANSIÇÃO COM BLUR CORRIGIDA
+// ==========================================
+// ==========================================
+// 4. LÓGICA DE TRANSIÇÃO COM BLUR PROGRESSIVO
 // ==========================================
 function irPara(cena, yawClick, pDestino, yDestino) {
     if (transicaoAtiva) return;
@@ -233,31 +245,25 @@ function irPara(cena, yawClick, pDestino, yDestino) {
     const pano = document.getElementById('panorama');
     const fovPadrao = window.innerWidth < 768 ? 80 : 110;
 
-    // Para o giro automático, centraliza a câmera no ponto clicado e dá um leve zoom in
     window.viewer.stopAutoRotate();
-    window.viewer.lookAt(0, yawClick, 55, 1000);
+    
+    // 1. O Zoom começa aqui e vai levar 1100ms para chegar no fundo
+    window.viewer.lookAt(0, yawClick, 55, 1100); 
 
-    // Aplica o efeito visual de desfoque e descoloração
+    // 2. O PULO DO GATO: Configuramos a transição do CSS para durar exatamente os mesmos 1.1s do zoom
+    pano.style.transition = 'filter 1.1s ease-out';
+    
+    // 3. Aplicamos o blur imediatamente. Ele vai começar em 0px e aumentar progressivamente até 5px junto com a caminhada!
     pano.style.filter = 'blur(5px) grayscale(20%)';
 
+    // 4. Quando a caminhada e o blur chegam no máximo (1100ms), o motor troca a cena
     setTimeout(function () {
         const isMobile = window.innerWidth < 768;
         const fovDestino = cena === "fachada" ? (isMobile ? 75 : 110) : fovPadrao;
 
-        // Carrega a nova cena posicionando a câmera nos ângulos corretos de destino
         window.viewer.loadScene(cena, pDestino, yDestino, fovDestino);
-        
-        // Remove o desfoque
-        pano.style.filter = 'blur(0px) grayscale(0%)';
-        
-        // Reativa a rotação lenta automática
-        window.viewer.startAutoRotate(-2);
 
-        setTimeout(function () {
-            transicaoAtiva = false;
-        }, 500);
-
-    }, 1100); // Executa a troca no ápice do desfoque (1.1 segundos)
+    }, 1100); 
 }
 // ============================================================
 // LÓGICA ISOLADA DO BOTÃO DE TELA CHEIA (SEM ALTERAR O TOUR)
