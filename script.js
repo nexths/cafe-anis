@@ -20,10 +20,13 @@ if (slides.length > 0) {
 // ==========================================
 // 2. CONTROLE DO TOUR HÍBRIDO (PSV + PANNELUM)
 // ==========================================
+// ==========================================
+// 2. CONTROLE DO TOUR HÍBRIDO (PSV + PANNELUM)
+// ==========================================
 let transicaoAtiva = false;
 let planetViewer = null;
 
-// Aguarda o HTML carregar 100% para evitar que o FSV quebre ao ler o container
+// Aguarda o HTML carregar 100% para evitar que o PSV quebre ao ler o container
 document.addEventListener("DOMContentLoaded", () => {
     
     // Inicializa a visão "Little Planet" usando o Photo Sphere Viewer
@@ -57,11 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const start = performance.now();
             const limiteZoom = window.innerWidth < 768 ? 16.6 : 50;
 
+            // Trava para garantir que o Pannellum só seja chamado UMA vez no fundo
+            let pannellumPreCarregado = false;
+
             function animate(now) {
                 let progress = (now - start) / duration;
                 if (progress > 1) progress = 1;
 
-                // Efeito de aceleração suave (Cubic Ease-Out)
+                // Efeito de acaleração suave (Cubic Ease-Out)
                 const ease = 1 - Math.pow(1 - progress, 4);
 
                 // Abre o ângulo da lente tirando o olho de peixe
@@ -76,11 +82,46 @@ document.addEventListener("DOMContentLoaded", () => {
                 const zoomValue = ease * limiteZoom;
                 if (planetViewer) planetViewer.zoom(zoomValue);
 
+                // ============================================================
+                // PRÉ-CARREGAMENTO EM SEGUNDO PLANO (AOS 85% DA ANIMAÇÃO)
+                // Lança o Pannellum por baixo enquanto a câmera ainda se mexe
+                // ============================================================
+                if (progress >= 0.85 && !pannellumPreCarregado) {
+                    pannellumPreCarregado = true;
+                    
+                    const pano = document.getElementById('panorama');
+                    pano.style.display = 'block';
+                    pano.style.opacity = '0'; // Invisível por enquanto
+                    
+                    iniciarTourPannellum(); // Liga o motor do Pannellum em background
+                }
+
                 if (progress < 1) {
                     requestAnimationFrame(animate);
                 } else {
-                    // Quando a animação acaba, faz a transição para o Pannellum
-                    trocarParaPannellum();
+                    // CÓDIGO NOVO: Quando chega em 100%, faz a fusão direta e limpa a memória
+                    const planet = document.getElementById('planet-view');
+                    const pano = document.getElementById('panorama');
+
+                    pano.style.transition = 'opacity 0.4s ease';
+                    if (planet) planet.style.transition = 'opacity 0.4s ease';
+
+                    requestAnimationFrame(() => {
+                        pano.style.opacity = '1';  // Mostra o Pannellum que já estava carregado
+                        if (planet) planet.style.opacity = '0'; // Some o Little Planet
+
+                        // Limpa o motor antigo da memória após o fade acabar
+                        setTimeout(() => {
+                            if (planetViewer) {
+                                planetViewer.destroy();
+                                planetViewer = null;
+                            }
+                            if (planet) {
+                                planet.innerHTML = '';
+                                planet.style.display = 'none';
+                            }
+                        }, 400);
+                    });
                 }
             }
 
@@ -89,46 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Faz a troca invisível de motores gráficos
-function trocarParaPannellum() {
-    const planet = document.getElementById('planet-view');
-    const pano = document.getElementById('panorama');
-
-    // Mostra o container do Pannellum por baixo em total transparência
-    pano.style.display = 'block';
-    pano.style.opacity = '0';
-
-    // Cria o tour oficial do Pannellum
-    iniciarTourPannellum();
-
-    // Garante sincronia de quadros de renderização antes de aplicar a opacidade
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            pano.style.opacity = '1';  // Surge o Pannellum
-            if (planet) planet.style.opacity = '0'; // Some o Little Planet do PSV
-
-            // Destrói o leitor do PSV da memória para o site ficar leve
-            setTimeout(() => {
-                if (planetViewer) {
-                    planetViewer.destroy();
-                    planetViewer = null;
-                }
-                if (planet) {
-                    planet.innerHTML = '';
-                    planet.style.display = 'none';
-                }
-            }, 300);
-        });
-    });
-}
-
 
 // ==========================================
 // 3. ESTRUTURA DE CENAS DO PANNELUM
 // ==========================================
 function iniciarTourPannellum() {
     const isMobile = window.innerWidth < 768;
-    const fovInicial = isMobile ? 88 : 101;
+    const fovInicial = isMobile ? 88 : 101.75;
 
     window.viewer = pannellum.viewer('panorama', {
         "default": {
@@ -148,7 +156,7 @@ function iniciarTourPannellum() {
             "fachada": {
                 "panorama": "./assets/pano/foto1.jpg",
                 "pitch": 0,
-                "yaw": -41,
+                "yaw": -41.83,
                 "hotSpots": [
                     {
                         "pitch": -5,
