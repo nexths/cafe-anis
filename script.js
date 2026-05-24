@@ -230,7 +230,7 @@ function irPara(cena, yawClick, pDestino, yDestino) {
     window.viewer.lookAt(0, yawClick, 55, 1000);
 
     // Aplica o efeito visual de desfoque e descoloração
-    pano.style.filter = 'blur(10px) grayscale(20%)';
+    pano.style.filter = 'blur(5px) grayscale(20%)';
 
     setTimeout(function () {
         const isMobile = window.innerWidth < 768;
