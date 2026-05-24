@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Café Anis - Tour Virtual & Galeria</title>
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>Café Anis - Santa Isabel</title>
-
-    <!-- PHOTO SPHERE VIEWER -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.1.1/index.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.1.1/index.min.css"/>
-
-<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.1.1/index.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/markers-plugin@5.1.1/index.min.js"></script>
-
-    <!-- CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core@5.1.1/index.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -101,51 +91,21 @@
     <!-- TOUR -->
 
     <section class="tour-section">
+    <h2>Explore Nosso Espaço</h2>
+    <p>Dê um giro de 360° e conheça o ambiente do Café Anis.</p>
 
-        <h2>
-            Explore Nosso Espaço
-        </h2>
+    <div id="panorama-container">
+        <div id="planet-view"></div>
+        
+        <div id="panorama"></div>
 
-        <p>
-            Dê um giro de 360°
-            e conheça o ambiente do Café Anis.
-        </p>
+        <button id="fullscreenBtn" title="Tela Cheia">⛶</button>
 
-        <div id="panorama-container">
-
-            <!-- OVERLAY -->
-
-            <div id="tour-overlay">
-
-                <button id="playButton">▶</button>
-              
-            </div>
-
-            <!-- TOOLTIP -->
-
-            <div id="cardapio-tooltip"
-                class="custom-tooltip">
-
-                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=300">
-
-                <h4>
-                    Latte Artesanal
-                </h4>
-
-                <p>
-                    Café espresso blend da casa
-                    com leite vaporizado cremoso.
-                </p>
-
-                <p class="tooltip-price">
-                    R$ 14,00
-                </p>
-
-            </div>
-
+        <div id="tour-overlay">
+            <button id="playButton">▶</button>
         </div>
-
-    </section>
+    </div>
+</section>
 
     <!-- CTA -->
 
@@ -166,5 +126,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>

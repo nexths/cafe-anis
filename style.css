@@ -1,337 +1,340 @@
-/* ========================= */
-/* STYLE.CSS CORRIGIDO */
-/* ========================= */
-
-:root{
-    --bg-color:#121212;
-    --text-color:#ffffff;
-    --accent-color:#d4a373;
-    --glass-border:rgba(255,255,255,0.12);
+/* ==========================================
+   VARIÁVEIS E CONFIGURAÇÕES GERAIS
+========================================== */
+:root {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --accent-color: #d4a373;
+    --glass-border: rgba(255, 255, 255, 0.12);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body{
-    background:var(--bg-color);
-    color:var(--text-color);
-    overflow-x:hidden;
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
 }
 
 /* HERO */
-.hero{
-    height:50vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
+.hero {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
     background: linear-gradient(rgba(0,0,0,0.7), var(--bg-color)), url('./assets/cafeanis2.jpeg') no-repeat center center/cover;
 }
 
-.hero h1{
-    font-size: clamp(3.5rem,10vw,5rem);
-    color:var(--accent-color);
-    margin-bottom:12px;
-    line-height:1;
-    transform:translateX(0.20em);
+.hero h1 {
+    font-size: clamp(3.5rem, 10vw, 5rem);
+    color: var(--accent-color);
+    margin-bottom: 12px;
+    line-height: 1;
+    transform: translateX(0.20em);
 }
 
-.hero h1 span{
-    position:relative;
-    display:inline-block;
-    padding-right:0.55em;
+.hero h1 span {
+    position: relative;
+    display: inline-block;
+    padding-right: 0.55em;
 }
 
-.hero h1 span::after{
-    content:"";
-    position:absolute;
+.hero h1 span::after {
+    content: "";
+    position: absolute;
     background-image: url('./assets/anis-pingo.png');
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-    width:1.15em;
-    height:1.15em;
-    left:95%;
-    top:-0.30em;
-    transform:translateX(-65%);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 1.15em;
+    height: 1.15em;
+    left: 95%;
+    top: -0.30em;
+    transform: translateX(-65%);
 }
 
-.hero p{
-    max-width:650px;
-    font-size:1.1rem;
-    line-height:1.6;
-    opacity:0.85;
+.hero p {
+    max-width: 650px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.85;
 }
 
-/* SOCIAL */
-.social-links{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:24px;
-    flex-wrap:wrap;
+/* LINKS SOCIAIS */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 24px;
+    flex-wrap: wrap;
 }
 
-.social-links a{
-    width:170px;
-    height:48px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    color:white;
-    border-radius:999px;
-    background: rgba(255,255,255,0.05);
+.social-links a {
+    width: 170px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--glass-border);
-    backdrop-filter:blur(10px);
-    transition:0.25s;
+    backdrop-filter: blur(10px);
+    transition: 0.25s;
 }
 
-.social-links a:hover{
-    transform:translateY(-3px);
-    border-color:var(--accent-color);
-    color:var(--accent-color);
-    box-shadow: 0 0 18px rgba(212,163,115,0.25);
+.social-links a:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 0 18px rgba(212, 163, 115, 0.25);
 }
 
 /* SEÇÕES */
 .gallery-section,
-.tour-section{
-    max-width:1100px;
-    margin:0 auto;
-    padding:40px 20px;
-    text-align:center;
+.tour-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
 }
 
 .gallery-section h2,
-.tour-section h2{
-    font-size:2rem;
-    color:var(--accent-color);
-    margin-bottom:10px;
+.tour-section h2 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
 }
 
 .gallery-section p,
-.tour-section p{
-    opacity:0.75;
-    margin-bottom:30px;
+.tour-section p {
+    opacity: 0.75;
+    margin-bottom: 30px;
 }
 
-/* GALERIA */
-#gallery-container{
-    width:100%;
-    height:500px;
-    position:relative;
-    overflow:hidden;
-    border-radius:18px;
+/* CARROSSEL DE GALERIA */
+#gallery-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
     border: 1px solid var(--glass-border);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.slide{
-    position:absolute;
-    width:100%;
-    height:100%;
-    opacity:0;
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
     transition: opacity 0.8s ease-in-out;
 }
 
-.slide.active{
-    opacity:1;
+.slide.active {
+    opacity: 1;
 }
 
-.slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* TOUR */
-#panorama-container{
-    width:100%;
-    height:500px;
-    position:relative;
-    overflow:hidden;
-    border-radius:18px;
+
+/* ==========================================
+   ESTRUTURA DE PALCO DO TOUR (CORRIGIDO)
+========================================== */
+#panorama-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
     border: 1px solid var(--glass-border);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background-color: #121212 !important;
 }
 
-#panorama-container canvas{
-    border-radius:18px;
+/* Força os visualizadores a ocuparem 100% da altura e largura física do container */
+#planet-view, #panorama {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    background: #121212 !important;
 }
 
-/* OVERLAY */
-#tour-overlay{
-    position:absolute;
-    inset:0;
-    z-index:999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  /*background: rgba(0,0,0,0.45);
-    backdrop-filter:blur(10px);*/
-    transition: opacity 1s ease, backdrop-filter 1s ease;
+#panorama {
+    display: none;
+    transition: opacity 0.4s ease, filter 0.6s ease;
+    will-change: filter, opacity;
+    transform: translate3d(0, 0, 0);
 }
 
-/* PLAY BUTTON (ESTILO INSTAGRAM CORRIGIDO) */
-#playButton {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #000000;
-    border: none;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 22px;
-    cursor: pointer;
+/* Oculta seletores nativos e caixas de texto genéricas do Pannellum */
+.pnlm-load-box, .pnlm-preview-img {
+    display: none !important;
+}
+.pnlm-container {
+    background: #121212 !important;
+}
+
+/* OVERLAY ESTILO GLASSMORPHISM */
+#tour-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    padding-left: 5px; /* Alinhamento óptico do triângulo */
+    pointer-events: none;
+}
+
+#playButton {
+    pointer-events: auto;
+    width: 95px;
+    height: 95px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: white;
+    font-size: 38px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+    padding-left: 6px;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                background 0.3s ease, 
+                opacity 0.3s ease;
     animation: pulse 2s infinite ease-in-out;
 }
 
 #playButton:hover {
     transform: scale(1.08);
-    background-color: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.25);
 }
 
-#playButton:active {
-    transform: scale(0.92);
-    background-color: rgba(230, 230, 230, 0.9);
-}
-
-@keyframes pulse{
+@keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+    50% { transform: scale(1.03); }
     100% { transform: scale(1); }
 }
 
-/* TOOLTIP */
-.custom-tooltip{
-    visibility:hidden;
-    position:absolute;
-    width:220px;
-    padding:15px;
-    border-radius:14px;
-    text-align:left;
-    color:white;
-    background: rgba(18,18,18,0.88);
-    border: 1px solid var(--glass-border);
-    backdrop-filter:blur(10px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.37);
-    z-index:1000;
-    transform: translate(-50%,-110%);
+/* HOTSPOTS PULSANTES BRANCOS */
+.hotspot-pulse {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50%;
+    background: white !important;
+    border: 2px solid #000000 !important; 
+    box-sizing: border-box;
+    animation: hotspotPulse 1.4s infinite;
+    cursor: pointer;
 }
 
-.custom-tooltip.active{
-    visibility:visible;
-}
-
-.custom-tooltip img{
-    width:100%;
-    border-radius:10px;
-    margin-bottom:10px;
-}
-
-.custom-tooltip h4{
-    color:var(--accent-color);
-    margin-bottom:5px;
-}
-
-.tooltip-price{
-    color:#25d366;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-/* CTA */
-.cta-section{
-    text-align:center;
-    padding:60px 20px;
-}
-
-.btn-whatsapp{
-    display:inline-block;
-    text-decoration:none;
-    color:white;
-    background:#14be53;
-    padding:15px 35px;
-    border-radius:999px;
-    font-weight:bold;
-    transition:0.25s;
-}
-
-.btn-whatsapp:hover{
-    transform:scale(1.05);
-}
-
-/* HOTSPOTS */
-.custom-hotspot{
-    width:15px;
-    height:15px;
-    border-radius:50%;
-    background:gray;
-    cursor:pointer;
-    box-shadow: 0 0 0 rgba(255, 255, 255, 0.39);
-    animation: hotspotPulse 1.6s infinite;
-}
-
-@keyframes hotspotPulse{
-    0%{
-        transform:scale(1);
-        box-shadow: 0 0 0 0 rgba(255,255,255,0.8);
+@keyframes hotspotPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
     }
-    70%{
-        transform:scale(1.1);
-        box-shadow: 0 0 0 20px rgba(255,255,255,0);
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
     }
-    100%{
-        transform:scale(1);
-        box-shadow: 0 0 0 0 rgba(255,255,255,0);
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
     }
 }
 
-/* RESPONSIVO */
-@media(max-width:768px){
-    .hero{
-        height:auto;
-        padding:70px 20px 30px;
-    }
-    #gallery-container{
-        height:300px;
-    }
-    #panorama-container{
-        height:350px;
-    }
-    .hero h1{
-        transform:none;
-    }
-    .social-links a{
-        width:145px;
-        height:44px;
-    }
-}
-/* SUMIR COM A TARJA CINZA DA TELA CHEIA */
-.psv-container, .psv-navbar {
-    background: transparent !important; /* Deixa o fundo da barra e do motor invisíveis */
+
+/* ==========================================
+   CTA & RESPONSIVIDADE
+========================================== */
+.cta-section {
+    text-align: center;
+    padding: 60px 20px;
 }
 
+.btn-whatsapp {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: #14be53;
+    padding: 15px 35px;
+    border-radius: 999px;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+}
+
+@media(max-width:768px) {
+    .hero {
+        height: auto;
+        padding: 70px 20px 30px;
+    }
+    #gallery-container {
+        height: 300px;
+    }
+    #panorama-container {
+        height: 350px;
+    }
+    .hero h1 {
+        transform: none;
+    }
+    .social-links a {
+        width: 145px;
+        height: 44px;
+    }
+}
+/* ==========================================
+   BOTÃO FLUTUANTE DE TELA CHEIA (CSS)
+========================================== */
 #panorama-container {
-    background-color: #121212 !important; /* Força o fundo a ser idêntico ao preto do seu site */
-}
-.psv-loader {
-    display: none !important;
+    position: relative; /* Garante que o botão fique preso dentro do container */
 }
 
-/* Garante que o modo tela cheia do navegador não invente cor de fundo */
+#fullscreenBtn {
+    position: absolute;
+    top: 15px;      /* Distância do topo */
+    right: 15px;    /* Distância da direita */
+    z-index: 10;    /* Força o botão a ficar na FRENTE das fotos e do overlay */
+    
+    /* Estilização Visual (Efeito Vidro/Glassmorphism) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse por cima */
+#fullscreenBtn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
 :-webkit-full-screen #panorama-container { background: #121212 !important; }
 :-ms-fullscreen #panorama-container { background: #121212 !important; }
 :fullscreen #panorama-container { background: #121212 !important; }
