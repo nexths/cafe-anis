@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================================
 function iniciarTourPannellum() {
     const isMobile = window.innerWidth < 768;
-    const fovInicial = isMobile ? 88 : 101.75;
+    const fovInicial = isMobile ? 65 : 101.75;
 
     window.viewer = pannellum.viewer('panorama', {
         "default": {
