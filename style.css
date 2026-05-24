@@ -30,7 +30,7 @@ body {
     align-items: center;
     text-align: center;
     padding: 20px;
-    background: linear-gradient(rgba(0,0,0,0.7), var(--bg-color)), url('./assets/cafeanis2.jpeg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.7), var(--bg-color)), url('./assets/cafeanis2.webp') no-repeat center center/cover;
 }
 
 .hero h1 {
