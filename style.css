@@ -23,13 +23,13 @@ body {
 
 /* HERO */
 .hero {
-    height: 50vh;
+    height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 40px 20px 10px; /* Reduzido padding inferior */
     background: linear-gradient(rgba(0,0,0,0.7), var(--bg-color)), url('./assets/cafeanis2.webp') no-repeat center center/cover;
 }
 
@@ -68,18 +68,18 @@ body {
     opacity: 0.85;
 }
 
-/* LINKS SOCIAIS */
+/* LINKS SOCIAIS (TRINCA DE BOTÕES) */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
     margin-top: 24px;
     flex-wrap: wrap;
 }
 
 .social-links a {
-    width: 170px;
-    height: 48px;
+    width: 150px;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,6 +90,7 @@ body {
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
     transition: 0.25s;
+    font-weight: 500;
 }
 
 .social-links a:hover {
@@ -99,11 +100,17 @@ body {
     box-shadow: 0 0 18px rgba(212, 163, 115, 0.25);
 }
 
-/* SEÇÕES */
-.gallery-section,
-.tour-section {
+/* SEÇÕES (ELIMINADO O BURACO NEGRO) */
+.gallery-section {
     max-width: 1100px;
     margin: 0 auto;
+    padding: 20px 20px 40px; /* Reduzido padding superior para colar nos botões */
+    text-align: center;
+}
+
+.tour-section {
+    max-width: 800px;
+    margin: 40px auto;
     padding: 40px 20px;
     text-align: center;
 }
@@ -121,7 +128,7 @@ body {
     margin-bottom: 30px;
 }
 
-/* CARROSSEL DE GALERIA */
+/* CARROSSEL DE GALERIA RESPONSIVO */
 #gallery-container {
     width: 100%;
     height: 500px;
@@ -150,22 +157,55 @@ body {
     object-fit: cover;
 }
 
+/* BOTÃO DE CHAMADA DO TOUR VIRTUAL */
+.btn-tour-trigger {
+    background: rgba(212, 163, 115, 0.1);
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 16px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 163, 115, 0.15);
+}
+
+.btn-tour-trigger:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(212, 163, 115, 0.4);
+}
+
+.btn-tour-trigger span {
+    font-size: 1.3rem;
+}
 
 /* ==========================================
-   ESTRUTURA DE PALCO DO TOUR (CORRIGIDO)
+   PALCO DO TOUR EM TELA CHEIA (MODAL FIXO)
 ========================================== */
+#tour-fullscreen-wrapper {
+    display: none; /* Controlado via JS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background-color: #121212;
+}
+
 #panorama-container {
     width: 100%;
-    height: 500px;
+    height: 100%;
     position: relative;
-    overflow: hidden;
-    border-radius: 18px;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     background-color: #121212 !important;
 }
 
-/* Força os visualizadores a ocuparem 100% da altura e largura física do container */
 #planet-view, #panorama {
     position: absolute;
     top: 0;
@@ -176,60 +216,44 @@ body {
 }
 
 #panorama {
-    display: none;
     transition: opacity 0.4s ease, filter 0.6s ease;
     will-change: filter, opacity;
-    transform: translate3d(0, 0, 0);
 }
 
-/* Oculta seletores nativos e caixas de texto genéricas do Pannellum */
-.pnlm-load-box, .pnlm-preview-img {
+/* BOTÃO FECHAR TOUR EXCLUSIVO */
+#closeTourBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10100;
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.25s ease;
+}
+
+#closeTourBtn:hover {
+    background: rgba(231, 76, 60, 0.8);
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+/* Oculta seletores nativos do Pannellum */
+.pnlm-load-box, .pnlm-preview-img, .pnlm-fullscreen-toggle-button {
     display: none !important;
 }
 .pnlm-container {
     background: #121212 !important;
-}
-
-/* OVERLAY ESTILO GLASSMORPHISM */
-#tour-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-}
-
-#playButton {
-    pointer-events: auto;
-    width: 95px;
-    height: 95px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: white;
-    font-size: 38px;
-    cursor: pointer;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
-    padding-left: 6px;
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                background 0.3s ease, 
-                opacity 0.3s ease;
-    animation: pulse 2s infinite ease-in-out;
-}
-
-#playButton:hover {
-    transform: scale(1.08);
-    background: rgba(255, 255, 255, 0.25);
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
 }
 
 /* HOTSPOTS PULSANTES BRANCOS */
@@ -245,96 +269,90 @@ body {
 }
 
 @keyframes hotspotPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
-    }
-    70% {
-        box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
-
 
 /* ==========================================
-   CTA & RESPONSIVIDADE
+   WHATSAPP FLUTUANTE PREMIUM
 ========================================== */
-.cta-section {
-    text-align: center;
-    padding: 60px 20px;
+.whatsapp-floating {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 56px;
+    height: 56px;
+    background-color: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    z-index: 9999;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: whatsPulse 2s infinite;
 }
 
-.btn-whatsapp {
-    display: inline-block;
-    text-decoration: none;
-    color: white;
-    background: #14be53;
-    padding: 15px 35px;
-    border-radius: 999px;
-    font-weight: bold;
-    transition: 0.25s;
+.whatsapp-icon {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
 }
 
-.btn-whatsapp:hover {
-    transform: scale(1.05);
+.whatsapp-floating:hover {
+    transform: scale(1.08);
 }
 
+@keyframes whatsPulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ==========================================
+   REGRAS DE RESPONSIVIDADE (MOBILE VS PC)
+========================================== */
 @media(max-width:768px) {
     .hero {
         height: auto;
-        padding: 70px 20px 30px;
-    }
-    #gallery-container {
-        height: 300px;
-    }
-    #panorama-container {
-        height: 350px;
+        padding: 60px 20px 20px;
     }
     .hero h1 {
         transform: none;
     }
+    .social-links {
+        gap: 8px;
+    }
     .social-links a {
-        width: 145px;
-        height: 44px;
+        width: 31%; /* Encaixa os 3 botões perfeitamente lado a lado */
+        min-width: 100px;
+        height: 42px;
+        font-size: 0.9rem;
+    }
+
+    /* GALERIA SANGRIA TOTAL (OCUPA LATERAIS INTEIRAS NO MOBILE) */
+    .gallery-section {
+        padding: 15px 0 30px; /* Zero nas laterais */
+    }
+    .gallery-section h2, .gallery-section p {
+        padding-x: 20px; /* Mantém os textos alinhados com margem */
+    }
+    #gallery-container {
+        height: 320px;
+        border-radius: 0px; /* Tira os cantos redondos para fundir com a tela */
+        border-left: none;
+        border-right: none;
+    }
+    
+    .whatsapp-floating {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    .whatsapp-icon {
+        width: 28px;
+        height: 28px;
     }
 }
-/* ==========================================
-   BOTÃO FLUTUANTE DE TELA CHEIA (CSS)
-========================================== */
-#panorama-container {
-    position: relative; /* Garante que o botão fique preso dentro do container */
-}
-
-#fullscreenBtn {
-    position: absolute;
-    top: 15px;      /* Distância do topo */
-    right: 15px;    /* Distância da direita */
-    z-index: 10;    /* Força o botão a ficar na FRENTE das fotos e do overlay */
-    
-    /* Estilização Visual (Efeito Vidro/Glassmorphism) */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-    font-size: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Efeito ao passar o mouse por cima */
-#fullscreenBtn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-:-webkit-full-screen #panorama-container { background: #121212 !important; }
-:-ms-fullscreen #panorama-container { background: #121212 !important; }
-:fullscreen #panorama-container { background: #121212 !important; }
