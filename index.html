@@ -129,15 +129,10 @@ span.aniz-word-target::after {
 }
 .eyebrow::before{content:"";width:35px;height:1px;background:var(--gold)}
 .hero h1{
- font:600 clamp(4.2rem,8.4vw,8.4rem)/.78 "Cormorant Garamond",serif;
- letter-spacing:-.055em;color:var(--paper);
+ font:600 clamp(3.6rem,7.5vw,7.6rem)/.85 "Cormorant Garamond",serif;
+ letter-spacing:-.045em;color:var(--paper);
 }
 .hero h1 em{font-weight:400;color:#b78c63}
-
-.hero h1 span.aniz-cafe {
-  position: relative;
-  display: inline-block;
-}
 
 .hero-desc{
  margin-top:34px;max-width:390px;color:#b9a796;font-size:14px;line-height:1.85;font-weight:300;
@@ -156,19 +151,19 @@ span.aniz-word-target::after {
 .social{display:flex;gap:18px}
 .social a{transition:.25s}.social a:hover{color:var(--gold)}
 
-/* CARD FLUTUANTE NA ALTURA DA PAREDE COM "APROVEITE O SEU MOMENTO" */
+/* CARD FLUTUANTE (PC) - Reduzido/encurtado lateralmente e mais compacto */
 .floating{
  position:absolute;z-index:8;left:clamp(22px,4vw,62px);top:clamp(180px, 22vh, 260px);bottom:auto;
- width:clamp(205px,22vw,285px);padding:16px 18px;
+ width: min(220px, 20vw); padding:12px 14px;
  background:rgba(18,12,9,.85);backdrop-filter:blur(15px);
  border:1px solid rgba(232,216,197,.15);
  box-shadow:0 14px 40px rgba(0,0,0,.45);
  animation:floatIn 1s 1.35s both;
 }
 @keyframes floatIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
-.floating-top{display:flex;justify-content:space-between;color:#806a57;font-size:8px;letter-spacing:.2em;text-transform:uppercase}
-.floating strong{display:block;font:500 22px/1.05 "Cormorant Garamond",serif;color:#ead9c5;margin:8px 0 4px}
-.floating p{font-size:10px;color:#a18c78}
+.floating-top{display:flex;justify-content:space-between;color:#806a57;font-size:7.5px;letter-spacing:.18em;text-transform:uppercase}
+.floating strong{display:block;font:500 18px/1.1 "Cormorant Garamond",serif;color:#ead9c5;margin:6px 0 3px}
+.floating p{font-size:9px;color:#a18c78}
 
 .section{position:relative;padding:clamp(100px,13vw,180px) clamp(22px,7vw,110px)}
 .intro-section{background:#120c09;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(50px,10vw,160px);align-items:center}
@@ -206,7 +201,6 @@ span.aniz-word-target::after {
 }
 .stamp b{font:500 24px "Cormorant Garamond",serif;letter-spacing:0}
 
-/* GALERIA AJUSTADA PARA CENTRALIZAÇÃO E MOVIMENTAÇÃO SUAVE */
 .gallery-section{background:#17100c;overflow:hidden;padding-left:0;padding-right:0;}
 .gallery-inner-container{
  max-width:1440px;
@@ -300,19 +294,15 @@ span.aniz-word-target::after {
  .hero-panel{min-height:40svh;margin-top:-1px;padding:25px 24px 35px;border:0}
  .nav-meta{display:none}
  .hero-copy{margin-top:20px}
- .hero h1{font-size:clamp(3.5rem,15vw,6rem); line-height:.9}
- .hero-desc{display:none}
+ /* Título "Aproveite cada momento." redimensionado suavemente no mobile */
+ .hero h1{font-size:clamp(2.4rem, 10vw, 3.6rem); line-height:1.05; letter-spacing:-.03em;}
+ .hero-desc{display:block; font-size:13px; margin-top:20px;}
  .hero-actions{margin-top:20px}
  .hero-foot{margin-top:25px}
- /* Card no mobile ajustado na proporção intermediária da parede */
+ /* REMOVE TOTALMENTE O CARD NO MOBILE */
  .floating{
-   top: 130px;
-   bottom: auto;
-   left: 16px;
-   width: min(74vw, 190px);
-   padding: 10px 12px;
+   display: none !important;
  }
- .floating strong{font-size: 16px; margin: 4px 0 2px;}
 
  .intro-section,.feature,.contact-grid{grid-template-columns:1fr}
  .intro-section{gap:50px}
@@ -349,7 +339,7 @@ span.aniz-word-target::after {
     <img src="assets/cafeanis2.webp" alt="Café Anis">
     <div class="floating">
       <div class="floating-top"><span>desde Santa Isabel</span><span>01</span></div>
-      <strong>Aproveite o<br>seu momento.</strong>
+      <strong>Café <br>com prosa.</strong>
       <p>Salgados · doces · aconchego</p>
     </div>
   </div>
@@ -362,7 +352,7 @@ span.aniz-word-target::after {
 
     <div class="hero-copy">
       <div class="eyebrow">Um lugar com gosto de pausa</div>
-      <h1>café<br><em>sem pressa.</em></h1>
+      <h1>Aproveite<br><em>cada momento.</em></h1>
       <p class="hero-desc">Entre para tomar um cappuccino, escolher um salgado, pegar um doce — ou simplesmente ficar.</p>
       <div class="hero-actions">
         <a class="btn" href="https://wa.me/5511998499922" target="_blank">Falar no WhatsApp <span>↗</span></a>
