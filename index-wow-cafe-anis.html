@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100b08">
+<meta name="description" content="Café Anis — café, salgados, doces e cappuccino em Santa Isabel.">
+<meta property="og:title" content="Café Anis — Santa Isabel">
+<meta property="og:description" content="Um lugar para chegar, escolher e ficar mais um pouco.">
+<meta property="og:image" content="https://nexths.github.io/cafe-anis/assets/preview.JPG">
+<title>Café Anis — Santa Isabel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#100b08;
+  --bg2:#17100c;
+  --paper:#e8d8c5;
+  --muted:#a99682;
+  --coffee:#8b5e3c;
+  --gold:#c59a6b;
+  --line:rgba(232,216,197,.14);
+  --white:#f5eee6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:"DM Sans",sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:20;
+  opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+::selection{background:var(--gold);color:#120c09}
+
+#intro{
+ position:fixed;inset:0;background:#0b0705;z-index:100;
+ display:grid;place-items:center;pointer-events:none;
+ animation:introOut 1s 2.15s cubic-bezier(.77,0,.18,1) forwards;
+}
+.intro-mark{overflow:hidden;text-align:center}
+.intro-kicker{font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:#a98d73;opacity:0;animation:rise .7s .25s forwards}
+.intro-title{
+  font:600 clamp(3.5rem, 10vw, 8rem)/1.1 "Cormorant Garamond",serif; /* Aumentei o line-height para 1.1 */
+  letter-spacing:-.03em;
+  color:#eee1d2;
+  opacity:0;
+  animation:rise 1s .45s forwards;
+  padding: 0 20px; /* Dá respiro lateral pro S não colar na borda */
+}
+.intro-mark{
+  overflow: visible; /* Mudado de hidden para visible para não cortar o S */
+  text-align:center;
+}
+.intro-line{width:0;height:1px;background:#9e7651;margin:24px auto 0;animation:lineIn 1s .9s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
+@keyframes lineIn{to{width:90px}}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+
+.hero{
+ min-height:100svh;position:relative;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
+ overflow:hidden;
+ background:var(--bg);
+}
+.hero-photo{
+ position:relative;min-height:100svh;overflow:hidden;
+ clip-path:inset(0 0 0 0);
+}
+.hero-photo::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,rgba(16,11,8,.02) 45%,rgba(16,11,8,.72) 100%),
+            linear-gradient(0deg,rgba(16,11,8,.35),transparent 40%);
+}
+.hero-photo img{
+ width:100%;height:100%;object-fit:cover;object-position:center;
+ transform:scale(1.015);
+ animation:heroReveal 2s .1s cubic-bezier(.2,.7,.1,1) both;
+}
+@keyframes heroReveal{from{transform:scale(1.08);filter:brightness(.55)}to{transform:scale(1.015);filter:brightness(.9)}}
+
+.hero-panel{
+ position:relative;z-index:3;margin-left:-1px;
+ min-height:100svh;padding:clamp(30px,5vw,72px) clamp(28px,6vw,88px);
+ display:flex;flex-direction:column;justify-content:space-between;
+ background:
+ radial-gradient(circle at 15% 20%,rgba(139,94,60,.16),transparent 32%),
+ linear-gradient(135deg,#18100c,#0e0907 70%);
+ border-left:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font:600 31px/1 "Cormorant Garamond",serif;letter-spacing:-.03em}
+.nav-meta{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.hero-copy{max-width:610px}
+.eyebrow{
+ display:flex;align-items:center;gap:12px;
+ font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);
+ margin-bottom:25px;
+}
+.eyebrow::before{content:"";width:35px;height:1px;background:var(--gold)}
+.hero h1{
+ font:600 clamp(4.2rem,8.4vw,8.4rem)/.78 "Cormorant Garamond",serif;
+ letter-spacing:-.055em;color:var(--paper);
+}
+.hero h1 em{font-weight:400;color:#b78c63}
+
+/* Anizinho no 'café' (na letra é) */
+.hero h1 span.aniz-cafe {
+  position: relative;
+  display: inline-block;
+}
+.hero h1 span.aniz-cafe::after {
+  content: "";
+  position: absolute;
+  background-image: url('./assets/anis-pingo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 0.40em;
+  height: 0.65em;
+  right: 0.2em;
+  top: -2em;
+}
+
+.hero-desc{
+ margin-top:34px;max-width:390px;color:#b9a796;font-size:14px;line-height:1.85;font-weight:300;
+}
+.hero-actions{display:flex;align-items:center;gap:25px;margin-top:38px;flex-wrap:wrap}
+.btn{
+ display:inline-flex;align-items:center;gap:13px;padding:14px 0;
+ font-size:10px;letter-spacing:.22em;text-transform:uppercase;border-bottom:1px solid var(--gold);
+ transition:.35s ease;
+}
+.btn span{font-size:17px;line-height:0}
+.btn:hover{color:var(--gold);gap:19px}
+.hero-foot{display:flex;justify-content:space-between;align-items:end;gap:25px;color:#776657;font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.scroll{display:flex;align-items:center;gap:12px}
+.scroll i{width:45px;height:1px;background:#6b5543;display:block}
+.social{display:flex;gap:18px}
+.social a{transition:.25s}.social a:hover{color:var(--gold)}
+
+.floating{
+ position:absolute;z-index:8;left:clamp(22px,4vw,62px);bottom:7.5%;
+ width:clamp(205px,22vw,285px);padding:18px 20px;
+ background:rgba(18,12,9,.73);backdrop-filter:blur(15px);
+ border:1px solid rgba(232,216,197,.15);
+ box-shadow:0 18px 50px rgba(0,0,0,.3);
+ animation:floatIn 1s 1.35s both;
+}
+@keyframes floatIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+.floating-top{display:flex;justify-content:space-between;color:#806a57;font-size:8px;letter-spacing:.2em;text-transform:uppercase}
+.floating strong{display:block;font:500 25px/1.05 "Cormorant Garamond",serif;color:#ead9c5;margin:10px 0 5px}
+.floating p{font-size:10px;color:#a18c78}
+
+.section{position:relative;padding:clamp(100px,13vw,180px) clamp(22px,7vw,110px)}
+.intro-section{background:#120c09;display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(50px,10vw,160px);align-items:center}
+.section-number{font-size:9px;letter-spacing:.3em;color:#6e5948;margin-bottom:25px}
+.editorial-title{
+ font:500 clamp(3.2rem,6.5vw,7rem)/.84 "Cormorant Garamond",serif;
+ letter-spacing:-.045em;color:var(--paper);
+}
+.editorial-title em{color:#a97951;font-weight:400}
+.intro-copy{max-width:460px;color:#aa9785;line-height:1.9;font-size:14px}
+.intro-copy p+p{margin-top:20px}
+.mini-rule{display:flex;align-items:center;gap:14px;margin-top:38px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#806b58}
+.mini-rule::after{content:"";width:60px;height:1px;background:#614a38}
+
+.feature{
+ position:relative;min-height:88vh;padding:0;overflow:hidden;
+ display:grid;grid-template-columns:1fr 1fr;
+ background:#0c0806;
+}
+.feature-image{position:relative;min-height:700px;overflow:hidden}
+.feature-image img{
+ width:100%;height:100%;object-fit:cover;
+ object-position:45% center;
+ transition:transform 1.3s cubic-bezier(.2,.6,.1,1);
+}
+.feature:hover .feature-image img{transform:scale(1.045)}
+.feature-image::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 65%,#0c0806)}
+.feature-copy{display:flex;flex-direction:column;justify-content:center;padding:80px clamp(30px,8vw,120px) 80px 5vw}
+.feature-copy .editorial-title{font-size:clamp(3.4rem,6vw,6.8rem)}
+.feature-copy p{margin-top:30px;max-width:370px;color:#a99582;font-size:14px;line-height:1.9}
+.stamp{
+ margin-top:45px;width:112px;height:112px;border:1px solid #6d513a;border-radius:50%;
+ display:grid;place-items:center;text-align:center;color:#9e7651;font-size:8px;line-height:1.6;letter-spacing:.15em;text-transform:uppercase;
+ transform:rotate(-10deg);
+}
+.stamp b{font:500 24px "Cormorant Garamond",serif;letter-spacing:0}
+
+/* GALERIA AJUSTADA PARA CENTRALIZAÇÃO E MOVIMENTAÇÃO SUAVE */
+.gallery-section{background:#17100c;overflow:hidden;padding-left:0;padding-right:0;}
+.gallery-inner-container{
+ max-width:1440px;
+ margin:0 auto;
+ padding:0 clamp(22px,7vw,110px);
+}
+.gallery-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:48px}
+.gallery-head p{max-width:300px;color:#887363;font-size:11px;line-height:1.7}
+
+.gallery-track-wrapper{
+ width:100%;
+ overflow-x:auto;
+ -webkit-overflow-scrolling:touch;
+ cursor: grab;
+ user-select: none;
+ scrollbar-width: none; /* Firefox */
+}
+.gallery-track-wrapper:active { cursor: grabbing; }
+.gallery-track-wrapper::-webkit-scrollbar{display:none}
+
+.gallery-track{
+ display:flex;gap:18px;width:max-content;
+ padding-left: clamp(22px, 7vw, 110px);
+ padding-right: clamp(22px, 7vw, 110px);
+}
+.g-card{width:min(33vw,390px);height:min(52vw,510px);min-width:250px;position:relative;overflow:hidden;flex-shrink:0}
+.g-card:nth-child(even){margin-top:65px}
+.g-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .8s;pointer-events:none;}
+/* Terceira foto (Cappuccino) */
+.g-card:nth-child(3) img {
+  object-position: 65% center; /* Ajuste o % conforme precisar */
+}
+
+/* Última foto do carrossel */
+.g-card:last-child img {
+  object-position: 35% center; /* Ajuste o % para puxar o copo/prato para onde quiser */
+}
+.g-card:hover img{transform:scale(1.05)}
+.g-card::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -100px 80px rgba(0,0,0,.45);pointer-events:none;}
+.g-label{position:absolute;z-index:2;left:18px;bottom:18px;font:500 24px "Cormorant Garamond",serif;color:#f1e4d5}
+
+.quote{
+ min-height:70vh;display:grid;place-items:center;text-align:center;
+ background:
+ radial-gradient(circle at center,rgba(112,72,43,.16),transparent 38%),
+ #100b08;
+}
+.quote-inner{max-width:900px;padding:40px}
+.quote-mark{font:700 65px "Cormorant Garamond",serif;color:#80583a;line-height:.5}
+.quote h2{font:500 clamp(3.1rem,6.8vw,7rem)/.88 "Cormorant Garamond",serif;color:#e4d3c0;letter-spacing:-.045em}
+.quote p{margin-top:28px;color:#796655;font-size:9px;letter-spacing:.3em;text-transform:uppercase}
+
+.tour-portal{
+ min-height:82vh;position:relative;overflow:hidden;
+ display:grid;place-items:center;background:#0b0705;
+}
+.tour-bg{
+ position:absolute;inset:0;
+ background:url("./tour-cafe-anis/assets/pano1.webp") center/cover no-repeat;
+ filter:brightness(.43) saturate(.72);
+ transform:scale(1.03);
+}
+.tour-portal::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,transparent 10%,rgba(5,3,2,.72) 78%)}
+.tour-content{position:relative;z-index:2;text-align:center;padding:30px}
+.tour-kicker{font-size:9px;letter-spacing:.35em;color:#c39a70;text-transform:uppercase}
+.tour-content h2{font:500 clamp(4rem,10vw,10rem)/.75 "Cormorant Garamond",serif;color:#eee1d2;letter-spacing:-.055em;margin:25px 0 35px}
+.tour-content p{max-width:390px;margin:auto;color:#b2a08d;font-size:13px;line-height:1.8}
+.tour-btn{
+ margin-top:35px;display:inline-flex;align-items:center;gap:14px;
+ padding:16px 24px;border:1px solid rgba(226,205,183,.38);background:rgba(20,12,8,.5);
+ color:#e7d6c4;font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+ transition:.35s;
+}
+.tour-btn:hover{background:#e7d6c4;color:#160e09;border-color:#e7d6c4}
+
+.contact{padding-top:120px;padding-bottom:80px;background:#120c09}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end}
+.contact h2{font:500 clamp(3.4rem,7vw,7rem)/.82 "Cormorant Garamond",serif;color:#e7d8c8;letter-spacing:-.05em}
+.contact-right{justify-self:end;text-align:right;color:#9e8a77;font-size:12px;line-height:2}
+.contact-right a{color:#dbc5ad;border-bottom:1px solid #634b39}
+.footer{margin-top:90px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#655346;font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+
+.whatsapp{
+ position:fixed;z-index:30;right:24px;bottom:24px;width:54px;height:54px;border-radius:50%;
+ display:grid;place-items:center;background:#1d1712;border:1px solid rgba(229,211,191,.25);
+ box-shadow:0 12px 35px rgba(0,0,0,.4);transition:.3s;
+}
+.whatsapp:hover{transform:translateY(-4px);border-color:#c59a6b}
+.whatsapp svg{width:21px;fill:#d8c1a7}
+
+.reveal{opacity:0;transform:translateY(35px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.1,1)}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:850px){
+  .hero h1 span.aniz-cafe::after {
+    right: -0.18em;
+    top: -1.45em;
+  }
+ .hero{display:block;min-height:100svh}
+ .hero-photo{height:67svh;min-height:0}
+ .hero-photo::after{background:linear-gradient(0deg,#100b08 0%,transparent 50%)}
+ .hero-panel{min-height:42svh;margin-top:-1px;padding:25px 24px 35px;border:0}
+ .nav-meta{display:none}
+ .hero-copy{margin-top:40px}
+ .hero h1{font-size:clamp(4rem,18vw,7rem)}
+ .hero-desc{display:none}
+ .hero-actions{margin-top:28px}
+ .hero-foot{margin-top:35px}
+ .floating{left:20px;bottom:34%;width:230px}
+ .intro-section,.feature,.contact-grid{grid-template-columns:1fr}
+ .intro-section{gap:50px}
+ .feature-image{min-height:62vh}
+ .feature-image img{object-position:35% center}
+ .feature-image::after{background:linear-gradient(0deg,#0c0806,transparent 45%)}
+ .feature-copy{padding:70px 25px 100px}
+ .gallery-head{display:block}
+ .gallery-head p{margin-top:20px}
+ .gallery-track{padding-left:20px;padding-right:20px;}
+ .g-card{width:70vw;height:105vw}
+ .quote{min-height:60vh}
+ .tour-portal{min-height:70vh}
+ .contact-right{justify-self:start;text-align:left;margin-top:30px}
+ .footer{gap:20px;flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <div class="intro-mark">
+    <div class="intro-kicker">Santa Isabel · SP</div>
+    <div class="intro-title">Café Anis</div>
+    <div class="intro-line"></div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-photo" id="heroPhoto">
+    <img src="./assets/cafeanis2.webp" alt="Café Anis">
+    <div class="floating">
+      <div class="floating-top"><span>desde Santa Isabel</span><span>01</span></div>
+      <strong>Um café para<br>ficar mais um pouco.</strong>
+      <p>Salgados · doces · cappuccino</p>
+    </div>
+  </div>
+
+  <div class="hero-panel">
+    <nav class="nav">
+      <div class="brand">Café Anis</div>
+      <div class="nav-meta">Café · Santa Isabel</div>
+    </nav>
+
+    <div class="hero-copy">
+      <div class="eyebrow">Um lugar com gosto de pausa</div>
+      <h1>caf<span class="aniz-cafe">é</span><br><em>sem pressa.</em></h1>
+      <p class="hero-desc">Entre para tomar um cappuccino, escolher um salgado, pegar um doce — ou simplesmente ficar.</p>
+      <div class="hero-actions">
+        <a class="btn" href="https://wa.me/5511998499922" target="_blank">Falar no WhatsApp <span>↗</span></a>
+        <a class="btn" href="https://www.instagram.com/cafeaniss_/" target="_blank">Instagram <span>↗</span></a>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <div class="scroll"><i></i> role para descobrir</div>
+      <div class="social"><a href="cardapio.pdf" target="_blank">Cardápio</a><a href="https://maps.app.goo.gl/uoETFiui7nu99PqA6" target="_blank">Mapa</a></div>
+    </div>
+  </div>
+</header>
+
+<section class="section intro-section">
+  <div class="reveal">
+    <div class="section-number">01 / O lugar</div>
+    <h2 class="editorial-title">Tem lugares que<br>pedem <em>tempo.</em></h2>
+  </div>
+  <div class="reveal">
+    <div class="intro-copy">
+      <p>O Café Anis é aquele tipo de lugar que combina com uma pausa no meio do dia. Um café, uma conversa, alguma coisa gostosa e mais alguns minutos sem olhar para o relógio.</p>
+      <p>Uma experiência simples, próxima e acolhedora — do jeito que um café de cidade deveria ser.</p>
+    </div>
+    <div class="mini-rule">Santa Isabel · São Paulo</div>
+  </div>
+</section>
+
+<section class="feature">
+  <div class="feature-image">
+    <img src="./assets/capuccino.webp" alt="Cappuccino do Café Anis" loading="lazy">
+  </div>
+  <div class="feature-copy reveal">
+    <div class="section-number">02 / Para acompanhar</div>
+    <h2 class="editorial-title">Seu momento<br>começa com<br><em>um pedido.</em></h2>
+    <p>Cappuccino cremoso, salgados, doces e opções para aquela vontade que aparece no meio do caminho. Escolha o seu e deixe o resto acontecer.</p>
+    <div class="stamp"><div><b>ANIS</b><br>feito para<br>pausar</div></div>
+  </div>
+</section>
+
+<section class="section gallery-section">
+  <div class="gallery-inner-container">
+    <div class="gallery-head reveal">
+      <div>
+        <div class="section-number">03 / Da vitrine à mesa</div>
+        <h2 class="editorial-title">Pequenas<br><em>vontades.</em></h2>
+      </div>
+      <p>Arraste para os lados (ou use o rato) para explorar.</p>
+    </div>
+  </div>
+
+  <div class="gallery-track-wrapper" id="galleryDrag">
+    <div class="gallery-track" aria-label="Galeria do Café Anis">
+      <div class="g-card"><img src="./assets/cafedamanha.webp" alt="Café da manhã" loading="lazy"><div class="g-label">Café da manhã</div></div>
+      <div class="g-card"><img src="./assets/ovo.webp" alt="Prato do Café Anis" loading="lazy"><div class="g-label">Para comer</div></div>
+      <div class="g-card"><img src="./assets/capuccino1.webp" alt="Cappuccino" loading="lazy"><div class="g-label">Cappuccino</div></div>
+      <div class="g-card"><img src="./assets/paocomovo.webp" alt="Pão com ovo" loading="lazy"><div class="g-label">Clássicos</div></div>
+      <div class="g-card"><img src="./assets/cafeanis2.webp" alt="Café Anis" loading="lazy"><div class="g-label">Café Anis</div></div>
+      <div class="g-card"><img src="./assets/capuccino.webp" alt="Cappuccino do Café Anis" loading="lazy"><div class="g-label">Uma pausa</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="quote-inner reveal">
+    <div class="quote-mark">“</div>
+    <h2>Um café bom não precisa<br>de pressa para ser lembrado.</h2>
+    <p>Café Anis · Santa Isabel</p>
+  </div>
+</section>
+
+<section class="tour-portal">
+  <div class="tour-bg"></div>
+  <div class="tour-content reveal">
+    <div class="tour-kicker">Agora, entre no Café Anis</div>
+    <h2>Veja por<br><em>você.</em></h2>
+    <p>Explore o ambiente em 360° e descubra cada cantinho antes mesmo de chegar.</p>
+    <button class="tour-btn" id="openTourBtn">Explorar o tour 360° <span>↗</span></button>
+  </div>
+</section>
+
+<section class="section contact">
+  <div class="contact-grid reveal">
+    <div>
+      <div class="section-number">04 / Venha</div>
+      <h2>Quando bater<br>a vontade,<br><em>apareça.</em></h2>
+    </div>
+    <div class="contact-right">
+      <p>Santa Isabel · São Paulo</p>
+      <p><a href="https://maps.app.goo.gl/uoETFiui7nu99PqA6" target="_blank">Abrir localização no Google Maps ↗</a></p>
+      <p><a href="https://wa.me/5511998499922" target="_blank">Chamar no WhatsApp ↗</a></p>
+      <p><a href="https://www.instagram.com/cafeaniss_/" target="_blank">@cafeaniss_ ↗</a></p>
+    </div>
+  </div>
+  <footer class="footer">
+    <span>Café Anis</span><span>Um lugar para ficar mais um pouco.</span>
+  </footer>
+</section>
+
+<a class="whatsapp" href="https://wa.me/5511998499922" target="_blank" aria-label="WhatsApp">
+<svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.9 11.9 0 0 0 12.04 0C5.46 0 .1 5.36.1 11.95c0 2.1.55 4.15 1.6 5.96L0 24l6.23-1.63a11.96 11.96 0 0 0 5.8 1.48h.01c6.58 0 11.95-5.36 11.95-11.95 0-3.19-1.24-6.19-3.49-8.4ZM12.04 21.9h-.01a9.93 9.93 0 0 1-5.06-1.39l-.36-.21-3.7.97.99-3.6-.23-.37a9.93 9.93 0 0 1-1.52-5.35c0-5.5 4.48-9.98 9.99-9.98 2.66 0 5.16 1.04 7.04 2.92a9.91 9.91 0 0 1 2.93 7.06c0 5.5-4.48 9.95-9.97 9.95Zm5.47-7.46c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.46-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.27.49 1.7.63.72.23 1.38.2 1.9.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/></svg>
+</a>
+
+<div id="tour-fullscreen-wrapper" aria-hidden="true">
+  <button id="closeTourBtn" type="button">×</button>
+  <div id="panorama-container">
+    <div id="planet-view"></div>
+    <div id="panorama"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+(() => {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, {threshold:.14});
+  els.forEach(el => io.observe(el));
+
+  const photo = document.getElementById('heroPhoto');
+  const img = photo?.querySelector('img');
+  if (photo && img && matchMedia('(pointer:fine)').matches) {
+    photo.addEventListener('pointermove', e => {
+      const r = photo.getBoundingClientRect();
+      const x = (e.clientX-r.left)/r.width-.5;
+      const y = (e.clientY-r.top)/r.height-.5;
+      img.style.transform = `scale(1.015) translate(${x*7}px,${y*5}px)`;
+    });
+    photo.addEventListener('pointerleave', () => img.style.transform='scale(1.015)');
+  }
+
+  // Script para arrastar as fotos com o rato (drag-to-scroll) na galeria
+  const slider = document.getElementById('galleryDrag');
+  if (slider) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.classList.remove('active');
+    });
+    slider.addEventListener('mousemove', (e) => {
+      if(!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 1.5; // Velocidade do arrasto
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ function nextSlide() {
 }
 
 if (slides.length > 0) {
-    setInterval(nextSlide, 4000);
+    setInterval(nextSlide, 3500);
 }
 
 // ==========================================
@@ -27,10 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (openTourBtn) {
         openTourBtn.addEventListener('click', () => {
 
-            window.open(
-                'EM_BREVE',
-                '_blank'
-            );
+              window.open('./tour-cafe-anis/index.html', '_blank');
+            
+            
 
         });
     }
