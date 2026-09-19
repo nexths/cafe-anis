@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#100b08">
 <meta name="description" content="Café Anis — café, salgados, doces e cappuccino em Santa Isabel.">
 <meta property="og:title" content="Café Anis — Santa Isabel">
@@ -45,19 +45,15 @@ button{font:inherit}
  display:grid;place-items:center;pointer-events:none;
  animation:introOut 1s 2.15s cubic-bezier(.77,0,.18,1) forwards;
 }
-.intro-mark{overflow:hidden;text-align:center}
+.intro-mark{overflow:visible;text-align:center}
 .intro-kicker{font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:#a98d73;opacity:0;animation:rise .7s .25s forwards}
 .intro-title{
-  font:600 clamp(3.5rem, 10vw, 8rem)/1.1 "Cormorant Garamond",serif; /* Aumentei o line-height para 1.1 */
+  font:600 clamp(3.5rem, 10vw, 8rem)/1.1 "Cormorant Garamond",serif;
   letter-spacing:-.03em;
   color:#eee1d2;
   opacity:0;
   animation:rise 1s .45s forwards;
-  padding: 0 20px; /* Dá respiro lateral pro S não colar na borda */
-}
-.intro-mark{
-  overflow: visible; /* Mudado de hidden para visible para não cortar o S */
-  text-align:center;
+  padding: 0 20px;
 }
 .intro-line{width:0;height:1px;background:#9e7651;margin:24px auto 0;animation:lineIn 1s .9s forwards}
 @keyframes rise{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:none}}
@@ -95,7 +91,35 @@ button{font:inherit}
  border-left:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font:600 31px/1 "Cormorant Garamond",serif;letter-spacing:-.03em}
+
+/* Logotipo limpo com espaço e proporção intacta */
+.brand{
+  font:600 31px/1 "Cormorant Garamond",serif;
+  letter-spacing:-.03em;
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+}
+span.aniz-word-target {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.15em;
+  padding-right: 0.55em;
+}
+span.aniz-word-target::after {
+  content: "";
+  position: absolute;
+  background-image: url('assets/anis-pingo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 0.95em;
+  height: 0.95em;
+  left: 95%;
+  top: -0.2em;
+  transform: translateX(-65%);
+}
+
 .nav-meta{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 .hero-copy{max-width:610px}
 .eyebrow{
@@ -110,22 +134,9 @@ button{font:inherit}
 }
 .hero h1 em{font-weight:400;color:#b78c63}
 
-/* Anizinho no 'café' (na letra é) */
 .hero h1 span.aniz-cafe {
   position: relative;
   display: inline-block;
-}
-.hero h1 span.aniz-cafe::after {
-  content: "";
-  position: absolute;
-  background-image: url('assets/anis-pingo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 0.40em;
-  height: 0.65em;
-  right: 0.2em;
-  top: -2em;
 }
 
 .hero-desc{
@@ -145,17 +156,18 @@ button{font:inherit}
 .social{display:flex;gap:18px}
 .social a{transition:.25s}.social a:hover{color:var(--gold)}
 
+/* CARD FLUTUANTE NA ALTURA DA PAREDE COM "APROVEITE O SEU MOMENTO" */
 .floating{
- position:absolute;z-index:8;left:clamp(22px,4vw,62px);bottom:7.5%;
- width:clamp(205px,22vw,285px);padding:18px 20px;
- background:rgba(18,12,9,.73);backdrop-filter:blur(15px);
+ position:absolute;z-index:8;left:clamp(22px,4vw,62px);top:clamp(180px, 22vh, 260px);bottom:auto;
+ width:clamp(205px,22vw,285px);padding:16px 18px;
+ background:rgba(18,12,9,.85);backdrop-filter:blur(15px);
  border:1px solid rgba(232,216,197,.15);
- box-shadow:0 18px 50px rgba(0,0,0,.3);
+ box-shadow:0 14px 40px rgba(0,0,0,.45);
  animation:floatIn 1s 1.35s both;
 }
-@keyframes floatIn{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:none}}
+@keyframes floatIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
 .floating-top{display:flex;justify-content:space-between;color:#806a57;font-size:8px;letter-spacing:.2em;text-transform:uppercase}
-.floating strong{display:block;font:500 25px/1.05 "Cormorant Garamond",serif;color:#ead9c5;margin:10px 0 5px}
+.floating strong{display:block;font:500 22px/1.05 "Cormorant Garamond",serif;color:#ead9c5;margin:8px 0 4px}
 .floating p{font-size:10px;color:#a18c78}
 
 .section{position:relative;padding:clamp(100px,13vw,180px) clamp(22px,7vw,110px)}
@@ -210,7 +222,7 @@ button{font:inherit}
  -webkit-overflow-scrolling:touch;
  cursor: grab;
  user-select: none;
- scrollbar-width: none; /* Firefox */
+ scrollbar-width: none;
 }
 .gallery-track-wrapper:active { cursor: grabbing; }
 .gallery-track-wrapper::-webkit-scrollbar{display:none}
@@ -223,15 +235,8 @@ button{font:inherit}
 .g-card{width:min(33vw,390px);height:min(52vw,510px);min-width:250px;position:relative;overflow:hidden;flex-shrink:0}
 .g-card:nth-child(even){margin-top:65px}
 .g-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .8s;pointer-events:none;}
-/* Terceira foto (Cappuccino) */
-.g-card:nth-child(3) img {
-  object-position: 65% center; /* Ajuste o % conforme precisar */
-}
-
-/* Última foto do carrossel */
-.g-card:last-child img {
-  object-position: 35% center; /* Ajuste o % para puxar o copo/prato para onde quiser */
-}
+.g-card:nth-child(3) img { object-position: 65% center; }
+.g-card:last-child img { object-position: 35% center; }
 .g-card:hover img{transform:scale(1.05)}
 .g-card::after{content:"";position:absolute;inset:0;box-shadow:inset 0 -100px 80px rgba(0,0,0,.45);pointer-events:none;}
 .g-label{position:absolute;z-index:2;left:18px;bottom:18px;font:500 24px "Cormorant Garamond",serif;color:#f1e4d5}
@@ -289,21 +294,26 @@ button{font:inherit}
 .reveal.visible{opacity:1;transform:none}
 
 @media(max-width:850px){
-  .hero h1 span.aniz-cafe::after {
-    right: -0.18em;
-    top: -1.45em;
-  }
  .hero{display:block;min-height:100svh}
- .hero-photo{height:67svh;min-height:0}
+ .hero-photo{height:60svh;min-height:0}
  .hero-photo::after{background:linear-gradient(0deg,#100b08 0%,transparent 50%)}
- .hero-panel{min-height:42svh;margin-top:-1px;padding:25px 24px 35px;border:0}
+ .hero-panel{min-height:40svh;margin-top:-1px;padding:25px 24px 35px;border:0}
  .nav-meta{display:none}
- .hero-copy{margin-top:40px}
- .hero h1{font-size:clamp(4rem,18vw,7rem)}
+ .hero-copy{margin-top:20px}
+ .hero h1{font-size:clamp(3.5rem,15vw,6rem); line-height:.9}
  .hero-desc{display:none}
- .hero-actions{margin-top:28px}
- .hero-foot{margin-top:35px}
- .floating{left:20px;bottom:34%;width:230px}
+ .hero-actions{margin-top:20px}
+ .hero-foot{margin-top:25px}
+ /* Card no mobile ajustado na proporção intermediária da parede */
+ .floating{
+   top: 130px;
+   bottom: auto;
+   left: 16px;
+   width: min(74vw, 190px);
+   padding: 10px 12px;
+ }
+ .floating strong{font-size: 16px; margin: 4px 0 2px;}
+
  .intro-section,.feature,.contact-grid{grid-template-columns:1fr}
  .intro-section{gap:50px}
  .feature-image{min-height:62vh}
@@ -339,20 +349,20 @@ button{font:inherit}
     <img src="assets/cafeanis2.webp" alt="Café Anis">
     <div class="floating">
       <div class="floating-top"><span>desde Santa Isabel</span><span>01</span></div>
-      <strong>Um café para<br>ficar mais um pouco.</strong>
-      <p>Salgados · doces · cappuccino</p>
+      <strong>Aproveite o<br>seu momento.</strong>
+      <p>Salgados · doces · aconchego</p>
     </div>
   </div>
 
   <div class="hero-panel">
     <nav class="nav">
-      <div class="brand">Café Anis</div>
+      <div class="brand">Café <span class="aniz-word-target">Anis</span></div>
       <div class="nav-meta">Café · Santa Isabel</div>
     </nav>
 
     <div class="hero-copy">
       <div class="eyebrow">Um lugar com gosto de pausa</div>
-      <h1>caf<span class="aniz-cafe">é</span><br><em>sem pressa.</em></h1>
+      <h1>café<br><em>sem pressa.</em></h1>
       <p class="hero-desc">Entre para tomar um cappuccino, escolher um salgado, pegar um doce — ou simplesmente ficar.</p>
       <div class="hero-actions">
         <a class="btn" href="https://wa.me/5511998499922" target="_blank">Falar no WhatsApp <span>↗</span></a>
@@ -487,7 +497,6 @@ button{font:inherit}
     photo.addEventListener('pointerleave', () => img.style.transform='scale(1.015)');
   }
 
-  // Script para arrastar as fotos com o rato (drag-to-scroll) na galeria
   const slider = document.getElementById('galleryDrag');
   if (slider) {
     let isDown = false;
@@ -512,7 +521,7 @@ button{font:inherit}
       if(!isDown) return;
       e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 1.5; // Velocidade do arrasto
+      const walk = (x - startX) * 1.5;
       slider.scrollLeft = scrollLeft - walk;
     });
   }
