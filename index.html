@@ -248,7 +248,7 @@ span.aniz-word-target::after {
 .tour-bg{
  position:absolute;inset:0;
  background:url("tour-cafe-anis/assets/pano1.webp") center/cover no-repeat;
- filter:brightness(.52) saturate(.8); /* Leve ajuste mais claro no desktop */
+ filter:brightness(.52) saturate(.8);
  transform:scale(1.03);
 }
 .tour-portal::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,transparent 30%,rgba(5,3,2,.55) 85%)}
@@ -269,7 +269,36 @@ span.aniz-word-target::after {
 .contact h2{font:500 clamp(3.4rem,7vw,7rem)/.82 "Cormorant Garamond",serif;color:#e7d8c8;letter-spacing:-.05em}
 .contact-right{justify-self:end;text-align:right;color:#9e8a77;font-size:12px;line-height:2}
 .contact-right a{color:#dbc5ad;border-bottom:1px solid #634b39}
-.footer{margin-top:90px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#655346;font-size:9px;letter-spacing:.18em;text-transform:uppercase}
+
+/* Rodapé na mesma cor do restante do footer (#655346) */
+.footer{
+  margin-top:90px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  color:#655346;
+  font-size:9px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.footer-main{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+  width:100%;
+}
+.footer-credit{
+  align-self:flex-end;
+  color:#655346;
+  transition:.3s;
+}
+.footer-credit:hover{
+  color:var(--gold);
+}
 
 .whatsapp{
  position:fixed;z-index:30;right:24px;bottom:24px;width:54px;height:54px;border-radius:50%;
@@ -296,7 +325,6 @@ span.aniz-word-target::after {
    display: none !important;
  }
 
- /* Clareia consideravelmente a foto do tour no smartphone */
  .tour-bg {
    filter: brightness(.50) saturate(.9) !important;
  }
@@ -314,7 +342,10 @@ span.aniz-word-target::after {
  .quote{min-height:60vh}
  .tour-portal{min-height:70vh}
  .contact-right{justify-self:start;text-align:left;margin-top:30px}
- .footer{gap:20px;flex-direction:column}
+ 
+ .footer{gap:14px}
+ .footer-main{flex-direction:column;align-items:flex-start;gap:8px}
+ .footer-credit{align-self:flex-start}
 }
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}
@@ -443,8 +474,13 @@ span.aniz-word-target::after {
       <p><a href="https://www.instagram.com/cafeaniss_/" target="_blank">@cafeaniss_ ↗</a></p>
     </div>
   </div>
+  
   <footer class="footer">
-    <span>Café Anis</span><span>Um lugar para ficar mais um pouco.</span>
+    <div class="footer-main">
+      <span>Café Anis</span>
+      <span>Um lugar para ficar mais um pouco.</span>
+    </div>
+    <a href="https://trendlocalseo.com.br" target="_blank" rel="noopener" class="footer-credit">Desenvolvido por TrendLocal SEO</a>
   </footer>
 </section>
 
