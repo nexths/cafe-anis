@@ -212,6 +212,7 @@ span.aniz-word-target::after {
  cursor: grab;
  user-select: none;
  scrollbar-width: none;
+ scroll-snap-type: x mandatory; /* Encaixe magnético no scroll/toque */
 }
 .gallery-track-wrapper:active { cursor: grabbing; }
 .gallery-track-wrapper::-webkit-scrollbar{display:none}
@@ -221,7 +222,15 @@ span.aniz-word-target::after {
  padding-left: clamp(22px, 7vw, 110px);
  padding-right: clamp(22px, 7vw, 110px);
 }
-.g-card{width:min(33vw,390px);height:min(52vw,510px);min-width:250px;position:relative;overflow:hidden;flex-shrink:0}
+.g-card{
+ width:min(33vw,390px);
+ height:min(52vw,510px);
+ min-width:250px;
+ position:relative;
+ overflow:hidden;
+ flex-shrink:0;
+ scroll-snap-align: center; /* Centraliza o card magneticamente */
+}
 .g-card:nth-child(even){margin-top:65px}
 .g-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .8s;pointer-events:none;}
 .g-card:nth-child(3) img { object-position: 65% center; }
@@ -248,7 +257,7 @@ span.aniz-word-target::after {
 .tour-bg{
  position:absolute;inset:0;
  background:url("tour-cafe-anis/assets/pano1.webp") center/cover no-repeat;
- filter:brightness(.52) saturate(.8); /* Leve ajuste mais claro no desktop */
+ filter:brightness(.52) saturate(.8);
  transform:scale(1.03);
 }
 .tour-portal::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,transparent 30%,rgba(5,3,2,.55) 85%)}
@@ -296,9 +305,8 @@ span.aniz-word-target::after {
    display: none !important;
  }
 
- /* Clareia consideravelmente a foto do tour no smartphone */
  .tour-bg {
-   filter: brightness(.50) saturate(.9) !important;
+   filter: brightness(.76) saturate(.85) !important;
  }
 
  .intro-section,.feature,.contact-grid{grid-template-columns:1fr}
@@ -412,7 +420,7 @@ span.aniz-word-target::after {
   </div>
 </section>
 
-<section class="quote">
+<section class="section quote">
   <div class="quote-inner reveal">
     <div class="quote-mark">“</div>
     <h2>Um café bom não precisa<br>de pressa para ser lembrado.</h2>
